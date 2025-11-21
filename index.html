@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Continent All Stars — Contacto</title>
+  <meta name="description" content="Continent All Stars — Contacto rápido por WhatsApp o correo" />
+  <style>
+    :root{
+      --azul:#0b2540;
+      --ocre:#c48b2a;
+      --blanco:#ffffff;
+      --muted:rgba(255,255,255,0.85);
+      --radius:16px;
+      font-family: "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      background: linear-gradient(180deg,var(--azul), #071a2b 95%);
+      color:var(--blanco);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+    }
+    .card{
+      width:100%;
+      max-width:760px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border-radius:20px;
+      padding:2.25rem;
+      box-shadow: 0 8px 40px rgba(2,6,23,0.7);
+      text-align:center;
+    }
+    img.logo{
+      height:72px;
+      object-fit:contain;
+      margin-bottom:1rem;
+    }
+    h1{
+      margin:0 0 .5rem;
+      font-weight:700;
+      letter-spacing:2px;
+      font-size:1.3rem;
+      text-transform:uppercase;
+    }
+    p.lead{
+      margin:0 0 1.5rem;
+      color:var(--muted);
+      font-size:0.98rem;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      background:var(--ocre);
+      color:#07202a;
+      border:none;
+      padding:.9rem 1.2rem;
+      border-radius:12px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:1rem;
+      box-shadow: 0 6px 18px rgba(196,139,42,0.18);
+    }
+    .modal-backdrop{
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.85));
+      z-index:40;
+    }
+    .modal{
+      background:var(--azul);
+      padding:1rem;
+      border-radius:14px;
+      width:calc(100% - 40px);
+      max-width:420px;
+      text-align:center;
+    }
+    .options{display:flex; gap:.6rem; margin-top:.8rem; justify-content:center; flex-wrap:wrap}
+    .option{
+      flex:1 1 160px;
+      background:rgba(255,255,255,0.03);
+      padding:.6rem .8rem;
+      border-radius:10px;
+      text-decoration:none;
+      color:var(--muted);
+      display:inline-flex;
+      gap:.6rem;
+      align-items:center;
+      justify-content:center;
+      font-weight:600;
+    }
+    .option.whatsapp{border:2px solid rgba(34,197,94,0.12);}
+    .option.email{border:2px solid rgba(99,102,241,0.06);}
+    .close{
+      margin-top:.8rem;
+      background:transparent;
+      border:none;
+      color:var(--muted);
+      font-size:.95rem;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="main" aria-labelledby="main-title">
+    <img class="logo" src="logo.png" alt="Continent All Stars — logo principal">
+    <h1 id="main-title">Representamos sueños, creamos historias</h1>
+    <p class="lead">Espectáculos corporativos de élite — shows personalizados, fuego, acrobacia y performance.</p>
+
+    <button id="contactBtn" class="btn" aria-haspopup="dialog" aria-controls="contactModal" aria-expanded="false">
+      Contáctanos
+    </button>
+  </div>
+
+  <div id="backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal" id="contactModal">
+      <h3 id="modal-title">¿Cómo prefieres contactarnos?</h3>
+      <div class="options">
+        <a class="option whatsapp" id="whatsappLink" href="https://wa.me/34674052460" target="_blank" rel="noopener">
+          📱 WhatsApp
+        </a>
+        <a class="option email" id="emailLink" href="mailto:admin@continentallstar.com?subject=Contacto%20desde%20web">
+          ✉️ Correo
+        </a>
+      </div>
+      <button class="close" id="closeModal">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('contactBtn');
+    const backdrop = document.getElementById('backdrop');
+    const close = document.getElementById('closeModal');
+
+    btn.addEventListener('click', () => {
+      backdrop.style.display = 'flex';
+      setTimeout(() => document.getElementById('whatsappLink').focus(), 80);
+    });
+
+    close.addEventListener('click', () => {
+      backdrop.style.display = 'none';
+      btn.focus();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && backdrop.style.display === 'flex') {
+        backdrop.style.display = 'none';
+        btn.focus();
+      }
+    });
+
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) {
+        backdrop.style.display = 'none';
+        btn.focus();
+      }
+    });
+  </script>
+</body>
+</html>
